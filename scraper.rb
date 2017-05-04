@@ -53,4 +53,5 @@ def scrape_person(name, url)
   ScraperWiki.save_sqlite(%i[id term], data)
 end
 
+ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 scrape_list('http://www.miqpm.com/new/Memberships_Index.php?ID=12')

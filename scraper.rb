@@ -50,6 +50,8 @@ def scrape_person(name, url)
     data[en] = noko.xpath('//td[not(.//td) and .//span[text()="%s"]]/following-sibling::td/span' % ar).text.tidy
   end
   data[:gender] = gender_from(data[:gender])
+
+  puts data.reject { |_, v| v.to_s.empty? }.sort_by { |k, _| k }.to_h if ENV['MORPH_DEBUG']
   ScraperWiki.save_sqlite(%i[id term], data)
 end
 
